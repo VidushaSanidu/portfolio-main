@@ -175,8 +175,7 @@ pnpm run preview # Preview production build locally
 src/
 ├── components/
 │   ├── layout/              # Navigation & layout components
-│   │   ├── Navbar/         # Active navigation with scroll detection
-│   │   └── FloatingNavigation/
+│   │   └── Navbar/         # Active navigation with scroll detection
 │   ├── sections/           # Main content sections
 │   │   ├── Hero/           # Landing section with grid layout
 │   │   ├── Chatbot/        # AI Assistant section integration

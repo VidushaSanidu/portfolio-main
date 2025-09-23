@@ -18,8 +18,7 @@
 src/
 ├── components/
 │   ├── layout/                    # Navigation & layout components
-│   │   ├── Navbar/
-│   │   └── FloatingNavigation/
+│   │   └── Navbar/
 │   │
 │   ├── sections/                  # Main content sections
 │   │   ├── Hero/                  # Landing with animations

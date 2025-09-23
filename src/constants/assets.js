@@ -19,8 +19,6 @@ import twitterClone from "../assets/projects/twitter-clone.webp";
 import apeUniFibExtractor from "../assets/projects/apeUniFibExtractor.webp";
 import melbUniUltimate from "../assets/projects/melbUniUltimate.webp";
 import careerChatbot from "../assets/projects/careerChatbot.webp";
-// 其他资源 
-import logo from "../assets/Logo.png";
 
 // 统一导出
 export const projectImages = {

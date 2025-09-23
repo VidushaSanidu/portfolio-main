@@ -18,7 +18,6 @@ const PersonalBranding = lazy(() => import("./components/sections/PersonalBrandi
 const GitHubActivity = lazy(() => import("./components/sections/GitHubActivity"));
 const Chatbot = lazy(() => import("./components/sections/Chatbot"));
 const Contact = lazy(() => import("./components/sections/Contact"));
-const FloatingNavigation = lazy(() => import("./components/layout/FloatingNavigation"));
 
 function AppContent() {
   const { currentTheme } = useTheme();
@@ -116,9 +115,6 @@ function AppContent() {
           </ErrorBoundary>
         </div>
       </main>
-
-      {/* Floating Navigation */}
-      <FloatingNavigation />
     </div>
   );
 }

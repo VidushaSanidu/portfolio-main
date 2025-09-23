@@ -3,7 +3,7 @@ export const HERO_CONTENT = {
   roles: [
     "Full Stack Developer",
     "AI Developer",
-    "AI Automation Specialist",
+    "AI Automation & Integration Specialist",
     "AWS & DevOps Engineer"
   ],
   summary: `End-to-end solution designer specializing in scalable and secure development. I architect and build robust full-stack applications, implement AI-driven automation solutions, and optimize cloud infrastructure on AWS. Passionate about delivering high-performance, secure solutions from concept to deployment.`,

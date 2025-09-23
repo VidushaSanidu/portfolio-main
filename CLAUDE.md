@@ -32,7 +32,7 @@ This is a React 18 portfolio application built with Vite, featuring a component-
 ```
 src/
 ├── components/
-│   ├── layout/           # Navigation & layout (Navbar, FloatingNavigation)
+│   ├── layout/           # Navigation & layout (Navbar)
 │   ├── sections/         # Main content sections (Hero, Experience, Projects, etc.)
 │   └── ui/              # Reusable UI components (animations, forms, common)
 ├── constants/           # Application data and configuration
