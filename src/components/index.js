@@ -16,7 +16,6 @@ export { default as Contact } from './sections/Contact';
 export { CareerChatbot } from './sections/CareerChatbot';
 
 // UI Components
-export { default as ThemeSwitcherButton } from './ui/common/ThemeSwitcherButton';
 export { ScrollProgressBar } from './ui/animations/ScrollAnimations/ScrollEffects';
 
 // Common UI Components

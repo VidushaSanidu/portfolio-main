@@ -33,10 +33,7 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 2, ease: "easeOut" }}
-                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl ${currentTheme === 'minimal'
-                        ? 'bg-gradient-to-r from-blue-100/40 to-purple-100/40'
-                        : 'bg-gradient-to-r from-purple-500/10 to-blue-500/10'
-                        }`}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl bg-gradient-to-r from-purple-500/10 to-blue-500/10"
                 />
 
                 {/* Original floating geometric shapes */}
@@ -89,29 +86,23 @@ export default function Hero() {
                     {/* Main Content - Left Side */}
                     <div className="lg:col-span-2 space-y-8">
                         <motion.div variants={titleVariants} className="space-y-4">
-                            <h1 className={`text-5xl md:text-7xl font-bold leading-tight bg-gradient-to-r bg-clip-text text-transparent ${currentTheme === 'minimal'
-                                ? 'from-gray-900 via-gray-700 to-gray-800'
-                                : 'from-white via-purple-200 to-blue-200'
-                                }`}>
+                            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-gradient-to-r bg-clip-text text-transparent from-white via-purple-200 to-blue-200">
                                 {HERO_CONTENT.name}
                             </h1>
 
-                            <div className={`text-2xl md:text-3xl font-medium h-12 flex items-center ${currentTheme === 'minimal' ? 'text-gray-700' : 'text-purple-300'
-                                }`}>
+                            <div className="text-2xl md:text-3xl font-medium h-12 flex items-center text-purple-300">
                                 <span className="mr-3">{typedRole}</span>
                                 <motion.span
                                     variants={cursorGlowVariants}
                                     animate="blink"
-                                    className={`inline-block w-1 h-8 rounded-full ${currentTheme === 'minimal' ? 'bg-gray-600' : 'bg-purple-400'
-                                        }`}
+                                    className="inline-block w-1 h-8 rounded-full bg-purple-400"
                                 />
                             </div>
                         </motion.div>
 
                         <motion.p
                             variants={itemVariants}
-                            className={`text-lg md:text-xl leading-relaxed ${currentTheme === 'minimal' ? 'text-gray-600' : 'text-neutral-300'
-                                }`}
+                            className="text-lg md:text-xl leading-relaxed text-neutral-300"
                         >
                             {HERO_CONTENT.summary}
                         </motion.p>

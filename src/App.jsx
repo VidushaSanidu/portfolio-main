@@ -38,41 +38,22 @@ function AppContent() {
     };
   }, []);
 
-  const getBackgroundGradient = () => {
-    switch (currentTheme) {
-      case 'neon':
-        return 'bg-black bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,255,255,0.15),rgba(255,0,255,0.1))]';
-      case 'minimal':
-        return 'bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,0,0,0.05),rgba(255,255,255,0))]';
-      case 'corporate':
-        return 'bg-slate-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(59,130,246,0.1),rgba(255,255,255,0))]';
-      default:
-        return 'bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))]';
-    }
-  };
-
   return (
-    <div className={`overflow-x-hidden antialiased transition-colors duration-500 ${currentTheme === 'minimal' ? 'text-gray-700' : 'text-neutral-300'
-      }`}>
+    <div className="overflow-x-hidden antialiased transition-colors duration-500 text-neutral-300">
       {/* Scroll Progress Bar */}
       <ScrollProgressBar />
 
       {/* Enhanced Parallax Background */}
       {/* <ParallaxBackground /> */}
 
-      {/* Theme-aware Animated Background */}
+      {/* Neon Theme Background */}
       <div className="fixed top-0 -z-20 h-full w-full">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className={`absolute top-0 h-screen w-screen transition-all duration-500 ${getBackgroundGradient()}`}
+          className="absolute top-0 h-screen w-screen transition-all duration-500 bg-black bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,255,255,0.15),rgba(255,0,255,0.1))]"
         >
-          <div
-            className={`absolute inset-0 ${currentTheme === 'minimal'
-              ? 'bg-[url("./assets/grid.svg")] opacity-5'
-              : 'bg-[url("./assets/grid.svg")] opacity-10'
-              }`}
-          />
+          <div className="absolute inset-0 bg-[url('./assets/grid.svg')] opacity-10" />
         </motion.div>
       </div>
 

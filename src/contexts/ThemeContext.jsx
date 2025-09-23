@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
@@ -20,18 +20,7 @@ export const THEMES = {
 };
 
 export function ThemeProvider({ children }) {
-  const [currentTheme, setCurrentTheme] = useState('neon');
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  // Load theme from localStorage on mount - but default to neon
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme && THEMES[savedTheme]) {
-      setCurrentTheme(savedTheme);
-    } else {
-      setCurrentTheme('neon'); // Always default to neon
-    }
-  }, []);
+  const currentTheme = 'neon'; // Always use neon theme
 
   // Apply theme to document root
   useEffect(() => {
@@ -47,23 +36,7 @@ export function ThemeProvider({ children }) {
 
     // Apply theme class to body
     document.body.className = `theme-${currentTheme}`;
-  }, [currentTheme]);
-
-  const switchTheme = (themeName) => {
-    if (themeName === currentTheme || !THEMES[themeName]) return;
-    
-    setIsTransitioning(true);
-    
-    // Smooth transition effect
-    setTimeout(() => {
-      setCurrentTheme(themeName);
-      localStorage.setItem('portfolio-theme', themeName);
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 300);
-    }, 150);
-  };
+  }, []);
 
   const getThemeClasses = (element = 'default') => {
     const theme = THEMES[currentTheme];
@@ -86,8 +59,6 @@ export function ThemeProvider({ children }) {
   const value = {
     currentTheme,
     themes: THEMES,
-    switchTheme,
-    isTransitioning,
     getThemeClasses,
     theme: THEMES[currentTheme],
   };
