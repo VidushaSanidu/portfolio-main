@@ -4,7 +4,7 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { getThemeFocusRing } from '../../../utils/accessibility';
 
 const SECTION_LINKS = [
-    { label: 'Me', href: '#hero' },
+    { label: 'Home', href: '#hero' },
     { label: 'Experience', href: '#experience' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
@@ -74,12 +74,12 @@ export default function Navbar() {
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
-                            Yuelin&apos;s Portfolio
+                            ViduzX <span className="text-sm font-normal">| XANVIA</span>
                         </motion.span>
                     </div>
 
                     {/* Desktop Navigation - Centered */}
-                    <div className="hidden md:flex items-center justify-center flex-1">
+                    <div className="hidden md:flex items-center justify-end flex-1">
                         <div className="flex items-center space-x-2">
                             {SECTION_LINKS.map((item) => {
                                 const isActive = activeSection === item.href.slice(1);
