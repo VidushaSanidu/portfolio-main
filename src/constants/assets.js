@@ -43,7 +43,3 @@ export const projectImages = {
   melbUniUltimate,
   careerChatbot,
 };
-
-export const generalImages = {
-  logo,
-};

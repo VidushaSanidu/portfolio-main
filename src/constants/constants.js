@@ -1,6 +1,7 @@
 export const HERO_CONTENT = {
   name: "Vidusha Sanidu",
   roles: [
+    "Co-Founder @ Xanvia",
     "Full Stack Developer",
     "AI Developer",
     "AI Automation & Integration Specialist",
