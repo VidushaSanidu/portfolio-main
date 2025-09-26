@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { UIProvider } from "./contexts/UIContext";
 import { ScrollProgressBar } from "./components/ui/animations/ScrollAnimations/ScrollEffects";
 import ErrorBoundary from "./components/ui/common/ErrorBoundary";
@@ -20,7 +20,6 @@ const Chatbot = lazy(() => import("./components/sections/Chatbot"));
 const Contact = lazy(() => import("./components/sections/Contact"));
 
 function AppContent() {
-  const { currentTheme } = useTheme();
 
   // Enable keyboard shortcuts
   useKeyboardShortcuts();

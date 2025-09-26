@@ -4,6 +4,7 @@ import { CONTACT } from "../../../constants/constants";
 import { useTheme } from "../../../contexts/ThemeContext";
 import ProfessionalContactForm from "./ProfessionalContactForm";
 import SectionHeading from "../../ui/common/SectionHeading";
+import { ContactIcon, Locate, Mail, MapPin, Panda, Phone, Rocket } from "lucide-react";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,8 +70,8 @@ export default function Contact() {
                             }
                         `}>
                             {[
-                                { id: 'info', label: 'Contact Info', icon: '📍' },
-                                { id: 'form', label: 'Send Message', icon: '📧' }
+                                { id: 'info', label: 'Contact Info'},
+                                { id: 'form', label: 'Send Message'}
                             ].map((tab) => (
                                 <motion.button
                                     key={tab.id}
@@ -89,7 +90,6 @@ export default function Contact() {
                                         }
                                     `}
                                 >
-                                    <span className="mr-2">{tab.icon}</span>
                                     {tab.label}
                                 </motion.button>
                             ))}
@@ -120,16 +120,16 @@ export default function Contact() {
                                                 {/* Address */}
                                                 <motion.div
                                                     variants={itemVariants}
-                                                    className="text-center md:text-left"
+                                                    className="text-center md:text-center"
                                                 >
                                                     <div className={`
-                                                        w-12 h-12 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4
+                                                        w-12 h-12 rounded-full flex items-center justify-center mx-auto  mb-4
                                                         ${theme.currentTheme === 'minimal'
                                                             ? 'bg-gray-100 text-gray-600'
                                                             : 'bg-neutral-800 text-purple-400'
                                                         }
                                                     `}>
-                                                        📍
+                                                        <MapPin/>
                                                     </div>
                                                     <h3 className={`font-semibold mb-2 ${theme.currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
                                                         }`}>
@@ -144,16 +144,16 @@ export default function Contact() {
                                                 {/* Phone */}
                                                 <motion.div
                                                     variants={itemVariants}
-                                                    className="text-center md:text-left"
+                                                    className="text-center md:text-center"
                                                 >
                                                     <div className={`
-                                                        w-12 h-12 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4
+                                                        w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4
                                                         ${theme.currentTheme === 'minimal'
                                                             ? 'bg-gray-100 text-gray-600'
                                                             : 'bg-neutral-800 text-purple-400'
                                                         }
                                                     `}>
-                                                        📞
+                                                        <Phone/>
                                                     </div>
                                                     <h3 className={`font-semibold mb-2 ${theme.currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
                                                         }`}>
@@ -173,16 +173,16 @@ export default function Contact() {
                                                 {/* Email */}
                                                 <motion.div
                                                     variants={itemVariants}
-                                                    className="text-center md:text-left"
+                                                    className="text-center md:text-center"
                                                 >
                                                     <div className={`
-                                                        w-12 h-12 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4
+                                                        w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4
                                                         ${theme.currentTheme === 'minimal'
                                                             ? 'bg-gray-100 text-gray-600'
                                                             : 'bg-neutral-800 text-purple-400'
                                                         }
                                                     `}>
-                                                        📧
+                                                        <Mail/>
                                                     </div>
                                                     <h3 className={`font-semibold mb-2 ${theme.currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
                                                         }`}>
@@ -214,7 +214,8 @@ export default function Contact() {
                                                         }
                                                     `}
                                                 >
-                                                    📧 Send Quick Email
+                                                <div className="flex items-center justify-center gap-2"><Mail/> Send Quick Email</div>
+                                                    
                                                 </motion.a>
 
                                                 <motion.button
@@ -229,7 +230,8 @@ export default function Contact() {
                                                         }
                                                     `}
                                                 >
-                                                    📝 Use Contact Form
+                                                <div className="flex items-center justify-center gap-2"><Rocket/> Use Contact Form</div>
+                                                     
                                                 </motion.button>
                                             </div>
                                         </div>

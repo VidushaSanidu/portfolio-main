@@ -1,20 +1,59 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
+import { BriefcaseIcon, Coffee, Handshake, Lightbulb, ChevronDown, Check } from 'lucide-react';
 
 // Form configuration
 const CONTACT_TYPES = [
-  { id: 'job', label: 'Job Opportunity', icon: '💼', color: 'from-green-500 to-emerald-500' },
-  { id: 'project', label: 'Project Collaboration', icon: '🤝', color: 'from-blue-500 to-cyan-500' },
-  { id: 'consultation', label: 'Consultation', icon: '💡', color: 'from-purple-500 to-pink-500' },
-  { id: 'other', label: 'Other', icon: '💬', color: 'from-orange-500 to-red-500' }
+  { id: 'job', label: 'Job Opportunity', icon: <BriefcaseIcon/>, color: 'from-green-500 to-emerald-500' },
+  { id: 'project', label: 'Project Collab', icon: <Handshake/>, color: 'from-blue-500 to-cyan-500' },
+  { id: 'consultation', label: 'Consultation', icon: <Lightbulb/>, color: 'from-purple-500 to-pink-500' },
+  { id: 'other', label: 'Other', icon: <Coffee/>, color: 'from-orange-500 to-red-500' }
 ];
 
 const URGENCY_LEVELS = [
-  { id: 'low', label: 'Low Priority', color: 'text-gray-500' },
-  { id: 'medium', label: 'Medium Priority', color: 'text-yellow-500' },
-  { id: 'high', label: 'High Priority', color: 'text-orange-500' },
-  { id: 'urgent', label: 'Urgent', color: 'text-red-500' }
+  { 
+    id: 'low', 
+    label: 'Low Priority', 
+    color: 'text-gray-300',
+    description: 'No rush, whenever convenient',
+  },
+  { 
+    id: 'medium', 
+    label: 'Medium Priority', 
+    color: 'text-yellow-300',
+    description: 'Standard timeline expected',
+  },
+  { 
+    id: 'high', 
+    label: 'High Priority', 
+    color: 'text-orange-300',
+    description: 'Quick response preferred',
+  },
+  { 
+    id: 'urgent', 
+    label: 'Urgent', 
+    color: 'text-red-300',
+    description: 'Time-sensitive project',
+  }
+];
+
+const BUDGET_OPTIONS = [
+  { id: '', label: 'Select budget range', disabled: true },
+  { id: 'under-5k', label: 'Under $5,000', icon: '💰' },
+  { id: '5k-10k', label: '$5,000 - $10,000', icon: '💰💰' },
+  { id: '10k-25k', label: '$10,000 - $25,000', icon: '💰💰💰' },
+  { id: '25k-plus', label: '$25,000+', icon: '💎' },
+  { id: 'discuss', label: "Let's discuss", icon: '🤝' }
+];
+
+const TIMELINE_OPTIONS = [
+  { id: '', label: 'Select timeline', disabled: true },
+  { id: 'asap', label: 'ASAP', color: 'text-red-300' },
+  { id: '1-month', label: 'Within 1 month',  color: 'text-orange-300' },
+  { id: '1-3-months', label: '1-3 months',  color: 'text-yellow-300' },
+  { id: '3-6-months', label: '3-6 months',  color: 'text-green-300' },
+  { id: 'flexible', label: 'Flexible',  color: 'text-blue-300' }
 ];
 
 const FormField = ({ label, error, children, required = false, theme }) => (
@@ -65,13 +104,213 @@ const ContactTypeSelector = ({ selected, onSelect, theme }) => (
           }
         `}
       >
-        <div className="text-2xl mb-2">{type.icon}</div>
+        <div className="text-2xl mb-2 flex items-center justify-center">{type.icon}</div>
         <div className="text-xs font-medium">{type.label}</div>
         
         {selected === type.id && (
           <motion.div
             layoutId="contactTypeSelector"
             className={`absolute inset-0 rounded-lg bg-gradient-to-r ${type.color} opacity-10`}
+            transition={{ duration: 0.2 }}
+          />
+        )}
+      </motion.button>
+    ))}
+  </div>
+);
+
+// Custom Select Component
+const CustomSelect = ({ 
+  options, 
+  value, 
+  onChange, 
+  placeholder = "Select an option", 
+  theme,
+  showIcons = false,
+  showDescriptions = false 
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedOption = options.find(option => option.id === value);
+
+  const handleSelect = (optionValue) => {
+    if (!options.find(opt => opt.id === optionValue)?.disabled) {
+      onChange(optionValue);
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <div className="relative">
+      {/* Select Button */}
+      <motion.button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+        className={`
+          w-full px-4 py-3 rounded-lg border transition-all duration-200 flex items-center justify-between
+          ${theme.currentTheme === 'minimal'
+            ? 'bg-white border-gray-300 text-gray-900 hover:border-gray-400'
+            : 'bg-neutral-800 border-neutral-600 text-white hover:border-neutral-500'
+          }
+          ${isOpen 
+            ? theme.currentTheme === 'minimal' 
+              ? 'border-gray-500 ring-1 ring-gray-500' 
+              : 'border-purple-500 ring-1 ring-purple-500'
+            : ''
+          }
+          focus:outline-none
+        `}
+      >
+        <div className="flex items-center gap-3">
+          {selectedOption && showIcons && selectedOption.icon && (
+            <span className="text-lg">{selectedOption.icon}</span>
+          )}
+          {selectedOption && selectedOption.indicator && (
+            <span className="text-sm">{selectedOption.indicator}</span>
+          )}
+          <span className={`
+            ${selectedOption && !selectedOption.disabled 
+              ? theme.currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
+              : theme.currentTheme === 'minimal' ? 'text-gray-500' : 'text-neutral-400'
+            }
+          `}>
+            {selectedOption ? selectedOption.label : placeholder}
+          </span>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronDown className="w-4 h-4" />
+        </motion.div>
+      </motion.button>
+
+      {/* Dropdown Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className={`
+              absolute top-full left-0 right-0 mt-2 rounded-lg border shadow-lg z-50 overflow-hidden
+              ${theme.currentTheme === 'minimal'
+                ? 'bg-white border-gray-200'
+                : 'bg-neutral-800 border-neutral-600'
+              }
+            `}
+          >
+            <div className="max-h-60 overflow-y-auto">
+              {options.map((option, index) => (
+                <motion.button
+                  key={option.id}
+                  type="button"
+                  onClick={() => handleSelect(option.id)}
+                  disabled={option.disabled}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className={`
+                    w-full px-4 py-3 text-left transition-colors duration-150 flex items-center justify-between group
+                    ${option.disabled
+                      ? theme.currentTheme === 'minimal' ? 'text-gray-400 cursor-not-allowed' : 'text-neutral-500 cursor-not-allowed'
+                      : theme.currentTheme === 'minimal'
+                        ? 'text-gray-900 hover:bg-gray-50'
+                        : 'text-white hover:bg-neutral-700'
+                    }
+                    ${value === option.id
+                      ? theme.currentTheme === 'minimal' ? 'bg-gray-100' : 'bg-neutral-700'
+                      : ''
+                    }
+                  `}
+                >
+                  <div className="flex items-center gap-3">
+                    {showIcons && option.icon && (
+                      <span className="text-lg">{option.icon}</span>
+                    )}
+                    {option.indicator && (
+                      <span className="text-sm">{option.indicator}</span>
+                    )}
+                    <div>
+                      <div className={`font-medium ${option.color || ''}`}>
+                        {option.label}
+                      </div>
+                      {showDescriptions && option.description && (
+                        <div className={`text-xs mt-1 ${
+                          theme.currentTheme === 'minimal' ? 'text-gray-500' : 'text-neutral-400'
+                        }`}>
+                          {option.description}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {value === option.id && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className={`
+                        ${theme.currentTheme === 'minimal' ? 'text-gray-600' : 'text-purple-400'}
+                      `}
+                    >
+                      <Check className="w-4 h-4" />
+                    </motion.div>
+                  )}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Backdrop to close dropdown */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+    </div>
+  );
+};
+
+// Priority/Urgency Level Selector with Visual Indicators
+const UrgencySelector = ({ selected, onSelect, theme }) => (
+  <div className="grid grid-cols-2 gap-3">
+    {URGENCY_LEVELS.map((level) => (
+      <motion.button
+        key={level.id}
+        type="button"
+        onClick={() => onSelect(level.id)}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className={`
+          relative p-4 rounded-lg text-left transition-all duration-200 border
+          ${selected === level.id
+            ? theme.currentTheme === 'minimal'
+              ? 'bg-gray-50 border-gray-300 text-gray-800'
+              : 'bg-neutral-700 border-purple-500 text-white'
+            : theme.currentTheme === 'minimal'
+              ? 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
+              : 'bg-neutral-800/50 border-neutral-700 text-neutral-400 hover:border-neutral-600'
+          }
+        `}
+      >
+        <div className="flex items-center gap-3 mb-2">
+          {/* <span className="text-lg">{level.indicator}</span> */}
+          <span className={`font-medium ${level.color}`}>{level.label}</span>
+        </div>
+        <div className={`text-xs ${
+          theme.currentTheme === 'minimal' ? 'text-gray-500' : 'text-neutral-400'
+        }`}>
+          {level.description}
+        </div>
+        
+        {selected === level.id && (
+          <motion.div
+            layoutId="urgencySelector"
+            className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10"
             transition={{ duration: 0.2 }}
           />
         )}
@@ -305,18 +544,14 @@ ${formData.message}
           </FormField>
 
           <FormField label="Priority Level" theme={theme}>
-            <select
-              name="urgency"
+            <CustomSelect
+              options={URGENCY_LEVELS}
               value={formData.urgency}
-              onChange={handleInputChange}
-              className={inputClassName}
-            >
-              {URGENCY_LEVELS.map(level => (
-                <option key={level.id} value={level.id}>
-                  {level.label}
-                </option>
-              ))}
-            </select>
+              onChange={(urgency) => setFormData(prev => ({ ...prev, urgency }))}
+              placeholder="Select priority level"
+              theme={theme}
+              showDescriptions={true}
+            />
           </FormField>
         </div>
 
@@ -334,35 +569,25 @@ ${formData.message}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField label="Budget Range (Optional)" theme={theme}>
-            <select
-              name="budget"
+            <CustomSelect
+              options={BUDGET_OPTIONS}
               value={formData.budget}
-              onChange={handleInputChange}
-              className={inputClassName}
-            >
-              <option value="">Select budget range</option>
-              <option value="under-5k">Under $5,000</option>
-              <option value="5k-10k">$5,000 - $10,000</option>
-              <option value="10k-25k">$10,000 - $25,000</option>
-              <option value="25k-plus">$25,000+</option>
-              <option value="discuss">Let's discuss</option>
-            </select>
+              onChange={(budget) => setFormData(prev => ({ ...prev, budget }))}
+              placeholder="Select budget range"
+              theme={theme}
+              showIcons={true}
+            />
           </FormField>
 
           <FormField label="Timeline (Optional)" theme={theme}>
-            <select
-              name="timeline"
+            <CustomSelect
+              options={TIMELINE_OPTIONS}
               value={formData.timeline}
-              onChange={handleInputChange}
-              className={inputClassName}
-            >
-              <option value="">Select timeline</option>
-              <option value="asap">ASAP</option>
-              <option value="1-month">Within 1 month</option>
-              <option value="1-3-months">1-3 months</option>
-              <option value="3-6-months">3-6 months</option>
-              <option value="flexible">Flexible</option>
-            </select>
+              onChange={(timeline) => setFormData(prev => ({ ...prev, timeline }))}
+              placeholder="Select timeline"
+              theme={theme}
+              showIcons={false}
+            />
           </FormField>
         </div>
 
