@@ -283,7 +283,7 @@ export default function PersonalBranding() {
         ))}
       </div>
 
-      {/* Achievements Grid */}
+      {/* Achievements Grid
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {ACHIEVEMENTS.map((achievement, index) => (
           <AchievementCard
@@ -293,7 +293,7 @@ export default function PersonalBranding() {
             theme={theme}
           />
         ))}
-      </div>
+      </div> */}
 
       {/* Code Snippet */}
       <div className="max-w-2xl mx-auto">

@@ -25,6 +25,10 @@ export const CONTACT = {
   socials: {
     linkedin: "https://www.linkedin.com/in/vidushasanidu",
     github: "https://github.com/VidushaSanidu",
-    blog: "https://medium.com/@vidushsanidu07",
+    medium: "https://medium.com/@vidushsanidu07",
+    facebook: "https://facebook.com/vidusha.sanidu", 
+    instagram: "https://www.instagram.com/_vidu_sh", 
+    kaggle: "https://kaggle.com/vidushasanidu",
+    whatsapp: "https://wa.me/94760416256", 
   },
 };
