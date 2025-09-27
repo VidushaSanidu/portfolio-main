@@ -40,10 +40,10 @@ const URGENCY_LEVELS = [
 
 const BUDGET_OPTIONS = [
   { id: '', label: 'Select budget range', disabled: true },
-  { id: 'under-5k', label: 'Under $5,000', icon: '💰' },
-  { id: '5k-10k', label: '$5,000 - $10,000', icon: '💰💰' },
-  { id: '10k-25k', label: '$10,000 - $25,000', icon: '💰💰💰' },
-  { id: '25k-plus', label: '$25,000+', icon: '💎' },
+  { id: 'under-5k', label: 'Under $500', icon: '💰' },
+  { id: '5k-10k', label: '$500 - $1,000', icon: '💰💰' },
+  { id: '10k-25k', label: '$1,000 - $5,000', icon: '💰💰💰' },
+  { id: '25k-plus', label: '$5,000+', icon: '💎' },
   { id: 'discuss', label: "Let's discuss", icon: '🤝' }
 ];
 
@@ -110,7 +110,7 @@ const ContactTypeSelector = ({ selected, onSelect, theme }) => (
         {selected === type.id && (
           <motion.div
             layoutId="contactTypeSelector"
-            className={`absolute inset-0 rounded-lg bg-gradient-to-r ${type.color} opacity-10`}
+            className={`absolute inset-0 rounded-lg opacity-10`}
             transition={{ duration: 0.2 }}
           />
         )}
@@ -329,17 +329,28 @@ const SubmissionSuccess = ({ onReset, theme }) => (
         : 'bg-green-900/20 border border-green-500/30'
     }`}
   >
-    <div className="text-6xl mb-4">✅</div>
     <h3 className={`text-xl font-bold mb-2 ${
       theme.currentTheme === 'minimal' ? 'text-green-800' : 'text-green-400'
     }`}>
       Message Sent Successfully!
     </h3>
-    <p className={`mb-6 ${
-      theme.currentTheme === 'minimal' ? 'text-green-700' : 'text-green-300'
+    <p className={`mb-4 ${
+      theme.currentTheme === 'minimal' ? 'text-green-400' : 'text-gray-300'
     }`}>
-      Thank you for reaching out! I'll get back to you within 24 hours.
+      Thank you for reaching out! Your message has been saved and I've been notified.
     </p>
+    <div className={`text-sm mb-6 p-4 rounded-lg ${
+      theme.currentTheme === 'minimal' 
+        ? 'bg-white border border-green-100 text-blue-600' 
+        : 'bg-green-900/10 border border-green-500/20 text-blue-400'
+    }`}>
+      <p className="flex items-center justify-center gap-2 mb-2">
+        You should receive a confirmation email shortly
+      </p>
+      <p className="flex items-center justify-center gap-2">
+        <span>⏰</span> I'll get back to you within 24 hours
+      </p>
+    </div>
     <motion.button
       onClick={onReset}
       whileHover={{ scale: 1.05 }}
@@ -347,8 +358,8 @@ const SubmissionSuccess = ({ onReset, theme }) => (
       className={`
         px-6 py-2 rounded-lg font-medium transition-colors
         ${theme.currentTheme === 'minimal'
-          ? 'bg-green-600 hover:bg-green-700 text-white'
-          : 'bg-green-500 hover:bg-green-400 text-black'
+          ? 'bg-blue-600 hover:bg-purple-700 text-white'
+          : 'bg-blue-500 hover:bg-blue-500 text-white'
         }
       `}
     >
@@ -394,6 +405,51 @@ export default function ProfessionalContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const submitToGoogleScript = async (formData) => {
+    const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+    
+    if (!scriptUrl) {
+      throw new Error('Google Script URL not configured');
+    }
+
+    const response = await fetch(scriptUrl, {
+      method: 'POST',
+      mode: 'no-cors', // Required for Google Apps Script
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    // Note: With no-cors mode, we can't read the response
+    // The script will handle success/failure internally
+    return { success: true };
+  };
+
+  const createMailtoFallback = (formData) => {
+    const contactTypeLabel = CONTACT_TYPES.find(t => t.id === formData.contactType)?.label;
+    const urgencyLabel = URGENCY_LEVELS.find(u => u.id === formData.urgency)?.label;
+    const budgetLabel = formData.budget ? BUDGET_OPTIONS.find(b => b.id === formData.budget)?.label : 'Not specified';
+    const timelineLabel = formData.timeline ? TIMELINE_OPTIONS.find(t => t.id === formData.timeline)?.label : 'Not specified';
+
+    const mailtoBody = `
+Contact Type: ${contactTypeLabel}
+Company: ${formData.company || 'Not specified'}
+Priority: ${urgencyLabel}
+Budget: ${budgetLabel}
+Timeline: ${timelineLabel}
+
+Message:
+${formData.message}
+
+---
+Sent from Portfolio Contact Form
+    `.trim();
+    
+    const fallbackEmail = import.meta.env.VITE_CONTACT_EMAIL || 'your-email@gmail.com';
+    return `mailto:${fallbackEmail}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(mailtoBody)}`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -406,33 +462,40 @@ export default function ProfessionalContactForm() {
     }
 
     setIsSubmitting(true);
+    setErrors({}); // Clear any previous errors
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Try to submit to Google Script first
+      await submitToGoogleScript(formData);
       
-      // In real implementation, you would send to your backend or email service
-      // For now, we'll create a mailto link as fallback
-      const mailtoBody = `
-Contact Type: ${CONTACT_TYPES.find(t => t.id === formData.contactType)?.label}
-Company: ${formData.company || 'Not specified'}
-Urgency: ${URGENCY_LEVELS.find(u => u.id === formData.urgency)?.label}
-Budget: ${formData.budget || 'Not specified'}
-Timeline: ${formData.timeline || 'Not specified'}
-
-Message:
-${formData.message}
-      `.trim();
-      
-      const mailtoLink = `mailto:liuyuelin.dev@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(mailtoBody)}`;
-      
-      // Open mailto as fallback
-      window.open(mailtoLink);
-      
+      // If successful, show success message
       setIsSubmitted(true);
+      
     } catch (error) {
-      console.error('Form submission error:', error);
-      setErrors({ submit: 'Failed to send message. Please try again.' });
+      console.error('Google Script submission failed:', error);
+      
+      // Fallback to mailto if Google Script fails
+      try {
+        const mailtoLink = createMailtoFallback(formData);
+        
+        // Show user a choice to use mailto or try again
+        const useMailto = window.confirm(
+          'There was an issue with the form submission. Would you like to open your email client instead? \n\nClick OK to open email client, or Cancel to try again.'
+        );
+        
+        if (useMailto) {
+          window.open(mailtoLink);
+          setIsSubmitted(true);
+        } else {
+          setErrors({ submit: 'Failed to send message. Please check your internet connection and try again, or use the email fallback option.' });
+        }
+        
+      } catch (fallbackError) {
+        console.error('Mailto fallback failed:', fallbackError);
+        setErrors({ 
+          submit: 'Failed to send message. Please try refreshing the page and submitting again, or contact me directly via email.' 
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -575,7 +638,7 @@ ${formData.message}
               onChange={(budget) => setFormData(prev => ({ ...prev, budget }))}
               placeholder="Select budget range"
               theme={theme}
-              showIcons={true}
+              showIcons={false}
             />
           </FormField>
 
@@ -632,12 +695,13 @@ ${formData.message}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-5 h-5 border-2 border-t-transparent border-current rounded-full"
               />
-              Sending Message...
+              <div className="flex flex-col items-center">
+                <span className="text-sm opacity-75">This may take a moment</span>
+              </div>
             </div>
           ) : (
             <div className="flex items-center justify-center gap-2">
               <span>Send Message</span>
-              <span>→</span>
             </div>
           )}
         </motion.button>

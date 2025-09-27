@@ -189,10 +189,11 @@ const AchievementCard = ({ achievement, index, theme }) => (
 const CodeSnippet = ({ theme }) => {
   const [typedText, setTypedText] = useState('');
   const codeText = `const developer = {
-  name: "Yuelin Liu",
+  name: "Vidusha Sanidu",
   role: "Full Stack Developer",
-  passion: "Building amazing things",
-  superpower: "Turning coffee into code ☕"
+  passion: "Creating impactful digital experiences",
+  superpower: "Make complex concepts simple",
+  weekness: "Always hungry!"
 };`;
 
   useEffect(() => {

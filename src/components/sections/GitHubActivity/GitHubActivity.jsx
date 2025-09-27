@@ -3,15 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { GITHUB_CONFIG } from '../../../constants/github';
 import SectionHeading from '../../ui/common/SectionHeading';
+import { ArrowUpFromLine, BookCopy, Bug, CirclePlus, GitCommit, GitFork, GitPullRequest, Star, Trash2, Zap } from 'lucide-react';
 
 const ACTIVITY_TYPES = {
-  'PushEvent': { icon: '📤', label: 'Pushed code', color: 'text-green-400' },
-  'CreateEvent': { icon: '✨', label: 'Created', color: 'text-blue-400' },
-  'IssuesEvent': { icon: '🐛', label: 'Issue activity', color: 'text-orange-400' },
-  'PullRequestEvent': { icon: '🔄', label: 'Pull request', color: 'text-purple-400' },
-  'ForkEvent': { icon: '🍴', label: 'Forked', color: 'text-cyan-400' },
-  'WatchEvent': { icon: '⭐', label: 'Starred', color: 'text-yellow-400' },
-  'DeleteEvent': { icon: '🗑️', label: 'Deleted', color: 'text-red-400' }
+  'PushEvent': { icon: <ArrowUpFromLine/>, label: 'Pushed code', color: 'text-green-400' },
+  'CreateEvent': { icon: <CirclePlus/>, label: 'Created', color: 'text-blue-400' },
+  'IssuesEvent': { icon: <Bug/>, label: 'Issue activity', color: 'text-orange-400' },
+  'PullRequestEvent': { icon: <GitPullRequest/>, label: 'Pull request', color: 'text-purple-400' },
+  'ForkEvent': { icon: <GitFork/>, label: 'Forked', color: 'text-cyan-400' },
+  'WatchEvent': { icon: <Star/>, label: 'Starred', color: 'text-yellow-400' },
+  'DeleteEvent': { icon: <Trash2/>, label: 'Deleted', color: 'text-red-400' }
 };
 
 const ActivityCard = ({ activity, index, theme }) => {
@@ -124,9 +125,9 @@ const ActivityStats = ({ activities, theme }) => {
   }, { totalCommits: 0, repositories: new Set(), activityTypes: new Set() });
 
   const statItems = [
-    { label: 'Commits', value: stats.totalCommits, icon: '💻' },
-    { label: 'Repos', value: stats.repositories.size, icon: '📂' },
-    { label: 'Activities', value: activities.length, icon: '⚡' }
+    { label: 'Commits', value: stats.totalCommits, icon: <GitCommit/> },
+    { label: 'Repos', value: stats.repositories.size, icon: <BookCopy/> },
+    { label: 'Activities', value: activities.length, icon: <Zap/> }
   ];
 
   return (
@@ -145,7 +146,7 @@ const ActivityStats = ({ activities, theme }) => {
             }
           `}
         >
-          <div className="text-2xl mb-1">{stat.icon}</div>
+          <div className="text-3xl mb-1 flex justify-center">{stat.icon}</div>
           <div className={`text-xl font-bold ${
             theme.currentTheme === 'minimal' ? 'text-gray-800' : 'text-white'
           }`}>
@@ -295,7 +296,7 @@ export default function GitHubActivity() {
         <SectionHeading level="section">
           Live from GitHub
         </SectionHeading>
-        <p className={`text-lg max-w-2xl mx-auto mb-4 ${
+        <p className={`text-lg max-w-2xl mx-auto mb-2 ${
           theme.currentTheme === 'minimal' ? 'text-gray-600' : 'text-neutral-400'
         }`}>
           Real-time activity from my GitHub repositories. See what I'm building right now!
