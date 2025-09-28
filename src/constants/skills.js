@@ -28,7 +28,7 @@ export const SKILLS_DATA = {
     icon: Brain,
     color: "from-purple-500 to-pink-500",
     skills: [
-      { name: "TensorFlow", level: 75, years: 1, projects: 1 },
+      { name: "LangChain", level: 75, years: 1, projects: 1 },
       { name: "PyTorch", level: 80, years: 1, projects: 2 },
       { name: "AI Integration", level: 88, years: 1, projects: 2 },
       { name: "Machine Learning", level: 85, years: 2, projects: 2 },

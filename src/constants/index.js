@@ -10,5 +10,4 @@ export * from './technologies';
 
 // Configuration constants
 export * from './github';
-export * from './lighthouseScores';
 export * from './assets';

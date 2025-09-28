@@ -115,6 +115,8 @@ export default function Hero() {
                             <Button
                                 as="a"
                                 href={cvUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 variant="primary"
                                 size="lg"
                                 loading={isLoading}
