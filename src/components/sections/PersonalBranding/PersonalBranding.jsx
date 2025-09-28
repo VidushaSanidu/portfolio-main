@@ -1,96 +1,95 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 import SectionHeading from '../../ui/common/SectionHeading';
+import { Cpu, Goal, Quote, Route } from 'lucide-react';
 
 const BRAND_ELEMENTS = {
   philosophy: {
     title: "Developer Philosophy",
-    icon: "💭",
+    icon: <Quote />,
     content: [
-      "Code with purpose, design with empathy",
-      "Every line matters, every user counts",
-      "Innovation through iteration, excellence through persistence",
+      "Build with purpose, design with empathy",
+      "Lifelong learner, excelling through adaptation",
+      "Innovation through iteration, not perfection",
       "Building tomorrow's solutions with today's best practices"
     ]
   },
   journey: {
     title: "My Journey",
-    icon: "🛤️",
+    icon: <Route />,
     content: [
       "From curiosity to career - started with 'Hello World'",
       "Self-taught foundation, university-refined expertise",
-      "Open source contributor, continuous learner",
+      "Diverse projects across industries and scales",
       "Building products that solve real problems"
     ]
   },
   values: {
     title: "Core Values",
-    icon: "⭐",
+    icon: <Cpu />,
     content: [
       "Quality over quantity in every deliverable",
       "Collaborative growth through knowledge sharing",
       "User-first approach in all design decisions",
-      "Sustainable code for long-term success"
+      "Sustainable product for long-term success"
     ]
   },
   goals: {
     title: "Career Goals",
-    icon: "🎯",
+    icon: <Goal />,
     content: [
       "Lead innovative AI-powered development teams",
       "Contribute to open source projects that matter",
       "Mentor next generation of developers",
-      "Build products that positively impact millions"
+      "Build products that positively impact millions",
+      "Become influential voice in tech community"
     ]
   }
 };
 
-const ACHIEVEMENTS = [
-  {
-    title: "Performance Leader",
-    description: "Lighthouse 100/89 scores consistently",
-    icon: "🚀",
-    metric: "100%",
-    color: "from-green-400 to-emerald-500"
-  },
-  {
-    title: "AI Innovation",
-    description: "LangChain & RAG implementations",
-    icon: "🤖",
-    metric: "5+",
-    color: "from-purple-400 to-pink-500"
-  },
-  {
-    title: "Full Stack",
-    description: "End-to-end project delivery",
-    icon: "🛠️",
-    metric: "50+",
-    color: "from-blue-400 to-cyan-500"
-  },
-  {
-    title: "Open Source",
-    description: "Community contributions",
-    icon: "🌟",
-    metric: "MIT",
-    color: "from-orange-400 to-red-500"
-  }
-];
+// const ACHIEVEMENTS = [
+//   {
+//     title: "Performance Leader",
+//     description: "Lighthouse 100/89 scores consistently",
+//     icon: "🚀",
+//     metric: "100%",
+//     color: "from-green-400 to-emerald-500"
+//   },
+//   {
+//     title: "AI Innovation",
+//     description: "LangChain & RAG implementations",
+//     icon: "🤖",
+//     metric: "5+",
+//     color: "from-purple-400 to-pink-500"
+//   },
+//   {
+//     title: "Full Stack",
+//     description: "End-to-end project delivery",
+//     icon: "🛠️",
+//     metric: "50+",
+//     color: "from-blue-400 to-cyan-500"
+//   },
+//   {
+//     title: "Open Source",
+//     description: "Community contributions",
+//     icon: "🌟",
+//     metric: "MIT",
+//     color: "from-orange-400 to-red-500"
+//   }
+// ];
 
-const BrandCard = ({ element, data, isActive, onClick, theme }) => (
+const BrandCard = ({ data, theme }) => (
   <motion.div
     layout
     className={`
-      relative p-6 rounded-xl cursor-pointer transition-all duration-300
+      relative p-6 rounded-xl transition-all duration-300
       ${theme.currentTheme === 'minimal' 
         ? 'bg-white border border-gray-200 hover:border-gray-300' 
         : 'bg-neutral-800/40 border border-neutral-700/50 hover:border-neutral-600'
       }
-      ${isActive ? 'ring-2 ring-purple-500' : ''}
     `}
-    onClick={onClick}
     whileHover={{ scale: 1.02, y: -4 }}
-    whileTap={{ scale: 0.98 }}
   >
     <div className="flex items-center gap-3 mb-4">
       <span className="text-2xl">{data.icon}</span>
@@ -101,40 +100,27 @@ const BrandCard = ({ element, data, isActive, onClick, theme }) => (
       </h3>
     </div>
 
-    <AnimatePresence>
-      {isActive && (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      transition={{ duration: 0.3 }}
+      className="space-y-3"
+    >
+      {data.content.map((item, index) => (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
-          className="space-y-3"
+          key={index}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.1 }}
+          className={`flex items-start gap-3 text-sm ${
+            theme.currentTheme === 'minimal' ? 'text-gray-600' : 'text-neutral-300'
+          }`}
         >
-          {data.content.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`flex items-start gap-3 text-sm ${
-                theme.currentTheme === 'minimal' ? 'text-gray-600' : 'text-neutral-300'
-              }`}
-            >
-              <span className="text-purple-400 mt-1">▶</span>
-              <span>{item}</span>
-            </motion.div>
-          ))}
+          <span className="text-purple-400 mt-1">▶</span>
+          <span>{item}</span>
         </motion.div>
-      )}
-    </AnimatePresence>
-
-    {!isActive && (
-      <p className={`text-sm ${
-        theme.currentTheme === 'minimal' ? 'text-gray-500' : 'text-neutral-400'
-      }`}>
-        Click to explore my {data.title.toLowerCase()}
-      </p>
-    )}
+      ))}
+    </motion.div>
 
     {/* Background gradient */}
     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -247,7 +233,6 @@ const CodeSnippet = ({ theme }) => {
 };
 
 export default function PersonalBranding() {
-  const [activeElement, setActiveElement] = useState('philosophy');
   const theme = useTheme();
 
   return (
@@ -274,10 +259,7 @@ export default function PersonalBranding() {
         {Object.entries(BRAND_ELEMENTS).map(([key, data]) => (
           <BrandCard
             key={key}
-            element={key}
             data={data}
-            isActive={activeElement === key}
-            onClick={() => setActiveElement(activeElement === key ? null : key)}
             theme={theme}
           />
         ))}

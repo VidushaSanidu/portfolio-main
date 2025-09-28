@@ -1,163 +1,138 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useSwipeable } from "react-swipeable";
+import { motion } from "framer-motion";
 import ReferenceCard from "./ReferenceCard";
 import { REFERENCES } from "../../../constants/references";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useTheme } from "../../../contexts/ThemeContext";
-import useMobile from "../../../hooks/useMobile";
 import SectionHeading from "../../ui/common/SectionHeading";
 
-const variants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 300 : -300,
-    opacity: 0,
-    position: "absolute",
-  }),
-  center: {
-    x: 0,
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
     opacity: 1,
-    position: "relative",
-    transitionEnd: { position: "relative" },
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
   },
-  exit: (direction) => ({
-    x: direction < 0 ? 300 : -300,
-    opacity: 0,
-    position: "absolute",
-  }),
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 50,
+    scale: 0.9,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+      duration: 0.6,
+    },
+  },
 };
 
 export default function ReferenceSection() {
   const { currentTheme } = useTheme();
-  const isMobile = useMobile();
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const paginate = (newDirection) => {
-    if (isAnimating) return; // 🔒 阻止快速点击
-    setDirection(newDirection);
-    setIndex((prev) => (prev + newDirection + REFERENCES.length) % REFERENCES.length);
-    setIsAnimating(true);
-  };
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => paginate(1),
-    onSwipedRight: () => paginate(-1),
-    preventScrollOnSwipe: true,
-    trackTouch: true,
-    trackMouse: false,
-    delta: 50,
-    touchEventOptions: { passive: false },
-  });
 
   return (
-    <section className="py-12 px-6 max-w-4xl mx-auto flex flex-col items-center">
-      <div className="text-center mb-16">
+    <section className="py-16 px-6 max-w-7xl mx-auto">
+      {/* Header */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
         <SectionHeading level="section">
           Professional References
         </SectionHeading>
-        <p className={`text-lg max-w-2xl mx-auto ${
+        <p className={`text-lg max-w-2xl mx-auto mt-2 ${
           currentTheme === 'minimal' ? 'text-gray-600' : 'text-neutral-400'
         }`}>
-          Testimonials from colleagues and supervisors who have worked with me directly.
+          Testimonials from colleagues and Clients who have worked with me directly.
         </p>
-      </div>
+        
+      </motion.div>
 
-      <div
-        {...(isMobile ? handlers : {})}
-        className="relative w-full flex items-center justify-center"
-        style={{ minHeight: 400 }}
+      {/* References Grid */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 xl:gap-8"
       >
-        <motion.button
-          aria-label="Previous reference"
-          onClick={() => paginate(-1)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className={`hidden md:flex absolute left-[-3rem] top-1/2 -translate-y-1/2 z-10 p-3 rounded-full transition-all duration-300 shadow-lg ${
-            currentTheme === 'minimal'
-              ? 'bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 shadow-gray-200/50'
-              : 'bg-neutral-800/80 hover:bg-purple-700/80 text-white border border-neutral-600 shadow-black/20'
-          }`}
-        >
-          <FiChevronLeft size={24} />
-        </motion.button>
-
-        <AnimatePresence
-          custom={direction}
-          initial={false}
-          onExitComplete={() => setIsAnimating(false)} // ✅ 解锁动画状态
-        >
+        {REFERENCES.map((reference, index) => (
           <motion.div
             key={index}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 400, damping: 40 },
-              opacity: { duration: 0.2 },
+            variants={cardVariants}
+            whileHover={{ 
+              y: -8,
+              transition: { type: "spring", stiffness: 300, damping: 20 }
             }}
-            className="w-full flex justify-center"
+            className="flex justify-center"
           >
-            <ReferenceCard {...REFERENCES[index]} />
+            <ReferenceCard {...reference} />
           </motion.div>
-        </AnimatePresence>
-
-        <motion.button
-          aria-label="Next reference"
-          onClick={() => paginate(1)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className={`hidden md:flex absolute right-[-3rem] top-1/2 -translate-y-1/2 z-10 p-3 rounded-full transition-all duration-300 shadow-lg ${
-            currentTheme === 'minimal'
-              ? 'bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 shadow-gray-200/50'
-              : 'bg-neutral-800/80 hover:bg-purple-700/80 text-white border border-neutral-600 shadow-black/20'
-          }`}
-        >
-          <FiChevronRight size={24} />
-        </motion.button>
-      </div>
-
-      <div className="flex items-center gap-3 mt-8">
-        {REFERENCES.map((_, i) => (
-          <motion.button
-            key={i}
-            onClick={() => {
-              if (isAnimating || i === index) return;
-              setDirection(i > index ? 1 : -1);
-              setIndex(i);
-              setIsAnimating(true);
-            }}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            className={`relative h-3 w-3 rounded-full transition-all duration-300 ${
-              i === index 
-                ? (currentTheme === 'minimal' ? 'bg-gray-700' : 'bg-purple-400')
-                : (currentTheme === 'minimal' ? 'bg-gray-300 hover:bg-gray-400' : 'bg-neutral-600 hover:bg-neutral-500')
-            }`}
-            aria-label={`Go to reference ${i + 1}`}
-          >
-            {i === index && (
-              <motion.div
-                layoutId="activeIndicator"
-                className={`absolute inset-0 rounded-full ${
-                  currentTheme === 'minimal' ? 'bg-gray-700' : 'bg-purple-400'
-                }`}
-                style={{ scale: 1.5, opacity: 0.3 }}
-              />
-            )}
-          </motion.button>
         ))}
-        
-        {/* Progress text */}
-        <span className={`ml-4 text-sm font-medium ${
-          currentTheme === 'minimal' ? 'text-gray-500' : 'text-neutral-400'
-        }`}>
-          {index + 1} of {REFERENCES.length}
-        </span>
-      </div>
+      </motion.div>
+
+      {/* Footer stats */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="mt-16 text-center"
+      >
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
+          <div className={`flex flex-col items-center ${
+            currentTheme === 'minimal' ? 'text-gray-700' : 'text-neutral-300'
+          }`}>
+            <span className={`text-2xl font-bold ${
+              currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
+            }`}>
+              100%
+            </span>
+            <span className="text-sm uppercase tracking-wide">Trust</span>
+          </div>
+          
+          <div className={`w-px h-12 hidden sm:block ${
+            currentTheme === 'minimal' ? 'bg-gray-300' : 'bg-neutral-600'
+          }`} />
+          
+          <div className={`flex flex-col items-center ${
+            currentTheme === 'minimal' ? 'text-gray-700' : 'text-neutral-300'
+          }`}>
+            <span className={`text-2xl font-bold ${
+              currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
+            }`}>
+              100%
+            </span>
+            <span className="text-sm uppercase tracking-wide">Positive</span>
+          </div>
+          
+          <div className={`w-px h-12 hidden sm:block ${
+            currentTheme === 'minimal' ? 'bg-gray-300' : 'bg-neutral-600'
+          }`} />
+          
+          <div className={`flex flex-col items-center ${
+            currentTheme === 'minimal' ? 'text-gray-700' : 'text-neutral-300'
+          }`}>
+            <span className={`text-2xl font-bold ${
+              currentTheme === 'minimal' ? 'text-gray-900' : 'text-white'
+            }`}>
+              100%
+            </span>
+            <span className="text-sm uppercase tracking-wide">Satisfaction</span>
+          </div>
+           
+        </div>
+      </motion.div>
     </section>
   );
 }

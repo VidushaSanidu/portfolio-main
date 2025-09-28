@@ -3,7 +3,7 @@ import { useTheme } from "../../../contexts/ThemeContext";
 
 const CLAMP_LINES = 5;
 
-const QuoteText = ({ text }) => {
+const QuoteText = ({ text, className = "" }) => {
   const { currentTheme } = useTheme();
   const [expanded, setExpanded] = useState(false);
   const [isTruncated, setIsTruncated] = useState(false);
@@ -34,9 +34,9 @@ const QuoteText = ({ text }) => {
     <div>
       <p
         ref={quoteRef}
-        className={`italic text-base leading-snug sm:text-[1rem] sm:leading-relaxed transition-all duration-200 ${
+        className={`italic leading-snug transition-all duration-200 ${
           currentTheme === 'minimal' ? 'text-gray-700' : 'text-gray-200'
-        } ${!expanded ? `line-clamp-${CLAMP_LINES}` : ""}`}
+        } ${!expanded ? "line-clamp-7" : ""} ${className || "text-base sm:text-[1rem] sm:leading-relaxed"}`}
       >
         "{text}"
       </p>
@@ -44,8 +44,8 @@ const QuoteText = ({ text }) => {
         <button
           aria-label="Toggle Quote Expansion"
           onClick={() => setExpanded(!expanded)}
-          className={`mt-2 hover:underline text-sm font-medium ${
-            currentTheme === 'minimal' ? 'text-blue-600' : 'text-purple-400'
+          className={`mt-2 hover:underline text-xs font-medium transition-colors duration-200 ${
+            currentTheme === 'minimal' ? 'text-blue-600 hover:text-blue-700' : 'text-purple-400 hover:text-purple-300'
           }`}
         >
           {expanded ? "Show less" : "Read more"}
