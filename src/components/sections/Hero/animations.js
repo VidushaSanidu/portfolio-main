@@ -75,3 +75,15 @@ export const cursorGlowVariants = {
     },
   },
 };
+
+// Profile card floating animation
+export const profileCardVariants = {
+  animate: {
+    y: [-3, 3, -3],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};

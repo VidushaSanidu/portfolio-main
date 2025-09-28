@@ -1,8 +1,11 @@
 {
-  "name": "react-portfolio",
+  "name": "vidusha-sanidu-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Personal portfolio website showcasing full-stack development, AI automation, and cloud solutions by Vidusha Sanidu",
+  "author": "Vidusha Sanidu <vidushsanidu07@gmail.com>",
+  "homepage": "https://vidushasanidu.dev",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -8,6 +8,7 @@ import { useTheme } from "../../../contexts/ThemeContext";
 import { useUI } from "../../../hooks/useUI";
 import SectionHeading from "../../ui/common/SectionHeading";
 
+
 const INITIAL_VISIBLE = 3;
 
 export default function Projects() {

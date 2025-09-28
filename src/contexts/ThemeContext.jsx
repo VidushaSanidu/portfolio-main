@@ -1,22 +1,8 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
 export const THEMES = {
-  default: {
-    name: 'Default',
-    icon: '🌌',
-    primary: 'from-purple-500 to-blue-500',
-    secondary: 'from-purple-400 to-blue-400',
-    accent: 'purple-500',
-    background: 'neutral-950',
-    surface: 'neutral-800',
-    text: 'neutral-300',
-    textBright: 'white',
-    border: 'neutral-700',
-    glow: 'purple-500/20',
-    shadow: 'rgba(147, 51, 234, 0.3)',
-  },
   neon: {
     name: 'Neon',
     icon: '⚡',
@@ -31,47 +17,10 @@ export const THEMES = {
     glow: 'cyan-400/30',
     shadow: 'rgba(0, 255, 255, 0.5)',
   },
-  minimal: {
-    name: 'Minimal',
-    icon: '🤍',
-    primary: 'from-gray-600 to-gray-800',
-    secondary: 'from-gray-500 to-gray-700',
-    accent: 'gray-600',
-    background: 'white',
-    surface: 'gray-50',
-    text: 'gray-700',
-    textBright: 'gray-900',
-    border: 'gray-200',
-    glow: 'gray-400/20',
-    shadow: 'rgba(0, 0, 0, 0.1)',
-  },
-  corporate: {
-    name: 'Corporate',
-    icon: '💼',
-    primary: 'from-blue-600 to-indigo-700',
-    secondary: 'from-blue-500 to-indigo-600',
-    accent: 'blue-600',
-    background: 'slate-50',
-    surface: 'white',
-    text: 'slate-700',
-    textBright: 'slate-900',
-    border: 'slate-200',
-    glow: 'blue-500/20',
-    shadow: 'rgba(59, 130, 246, 0.2)',
-  },
 };
 
 export function ThemeProvider({ children }) {
-  const [currentTheme, setCurrentTheme] = useState('default');
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  // Load theme from localStorage on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme && THEMES[savedTheme]) {
-      setCurrentTheme(savedTheme);
-    }
-  }, []);
+  const currentTheme = 'neon'; // Always use neon theme
 
   // Apply theme to document root
   useEffect(() => {
@@ -87,23 +36,7 @@ export function ThemeProvider({ children }) {
 
     // Apply theme class to body
     document.body.className = `theme-${currentTheme}`;
-  }, [currentTheme]);
-
-  const switchTheme = (themeName) => {
-    if (themeName === currentTheme || !THEMES[themeName]) return;
-    
-    setIsTransitioning(true);
-    
-    // Smooth transition effect
-    setTimeout(() => {
-      setCurrentTheme(themeName);
-      localStorage.setItem('portfolio-theme', themeName);
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 300);
-    }, 150);
-  };
+  }, []);
 
   const getThemeClasses = (element = 'default') => {
     const theme = THEMES[currentTheme];
@@ -126,8 +59,6 @@ export function ThemeProvider({ children }) {
   const value = {
     currentTheme,
     themes: THEMES,
-    switchTheme,
-    isTransitioning,
     getThemeClasses,
     theme: THEMES[currentTheme],
   };

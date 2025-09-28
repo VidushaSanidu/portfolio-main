@@ -1,15 +1,10 @@
 // Typography utilities for consistent heading styles across themes
 
-export const getHeadingClasses = (level = 'section', theme = 'default') => {
+export const getHeadingClasses = (level = 'section', theme = 'neon') => {
   const baseClasses = "font-bold bg-clip-text text-transparent";
   
-  // Gradient patterns by theme
-  const gradients = {
-    default: 'bg-gradient-to-r from-purple-400 to-blue-400',
-    neon: 'bg-gradient-to-r from-cyan-400 to-purple-400',
-    minimal: 'bg-gradient-to-r from-gray-800 to-gray-600',
-    corporate: 'bg-gradient-to-r from-blue-600 to-blue-800'
-  };
+  // Only neon gradient
+  const gradient = 'bg-gradient-to-r from-cyan-400 to-purple-400';
 
   // Size patterns by hierarchy level
   const sizes = {
@@ -19,7 +14,6 @@ export const getHeadingClasses = (level = 'section', theme = 'default') => {
     card: 'text-xl md:text-2xl'
   };
 
-  const gradient = gradients[theme] || gradients.default;
   const size = sizes[level] || sizes.section;
 
   return `${baseClasses} ${size} ${gradient}`;
@@ -29,34 +23,22 @@ export const getHeadingClasses = (level = 'section', theme = 'default') => {
 export const headingStyles = {
   // Hero section - largest and most prominent
   hero: {
-    default: 'text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent',
-    neon: 'text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent',
-    minimal: 'text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent',
-    corporate: 'text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent'
+    neon: 'text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent'
   },
   
   // Main section headings - consistent across all sections
   section: {
-    default: 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent',
-    neon: 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent',
-    minimal: 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent',
-    corporate: 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent'
+    neon: 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent'
   },
 
   // Sub-section headings
   subsection: {
-    default: 'text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent',
-    neon: 'text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent',
-    minimal: 'text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent',
-    corporate: 'text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent'
+    neon: 'text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent'
   },
 
   // Card/component headings
   card: {
-    default: 'text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent',
-    neon: 'text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent',
-    minimal: 'text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent',
-    corporate: 'text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent'
+    neon: 'text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent'
   }
 };
 
@@ -73,8 +55,8 @@ export const getHeadingSpacing = (level = 'section') => {
 };
 
 // Complete heading utility that combines classes and spacing
-export const getCompleteHeadingClasses = (level = 'section', theme = 'default') => {
-  const headingClass = headingStyles[level]?.[theme] || headingStyles[level]?.default || headingStyles.section.default;
+export const getCompleteHeadingClasses = (level = 'section', theme = 'neon') => {
+  const headingClass = headingStyles[level]?.neon || headingStyles.section.neon;
   const spacingClass = getHeadingSpacing(level);
   
   return `${headingClass} ${spacingClass}`;

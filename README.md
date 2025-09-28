@@ -1,14 +1,29 @@
-# React Portfolio 🚀
+# Vidusha Sanidu - Portfolio 🚀
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=flat-square&logo=vercel)](https://liuyuelin.dev)
-[![Stars](https://img.shields.io/github/stars/liuyuelintop/react-portfolio?style=social)](https://github.com/liuyuelintop/react-portfolio/stargazers)
-[![Portfolio Version](https://img.shields.io/badge/Version-Phase%207-success?style=flat-square)](https://github.com/liuyuelintop/react-portfolio)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=flat-square&logo=vercel)](https://vidushasanidu.dev)
+[![Stars](https://img.shields.io/github/stars/VidushaSanidu/portfolio-main?style=social)](https://github.com/VidushaSanidu/portfolio-main/stargazers)
+[![Portfolio Version](https://img.shields.io/badge/Version-1.0.0-success?style=flat-square)](https://github.com/VidushaSanidu/portfolio-main)
 
 ---
 
-An innovative, interactive portfolio crafted with cutting-edge React 18 technology, featuring smooth Framer Motion animations and elegant Tailwind CSS styling. This showcase presents my professional journey through dynamic project galleries, animated skill visualizations, and an intelligent AI career assistant. Built with enterprise-level architecture, accessibility-first design, and optimized performance for an exceptional user experience across all devices.
+A modern, interactive portfolio showcasing expertise in Full Stack Development, AI Automation, and AWS Cloud Solutions. Built with cutting-edge React 18 technology, featuring smooth Framer Motion animations and elegant Tailwind CSS styling. This portfolio presents my professional journey through dynamic project galleries, animated skill visualizations, and comprehensive project showcases.
 
 ![Portfolio Screenshot](./src/assets/og-image.png)
+
+---
+
+## 🚦 About Me
+
+**Vidusha Sanidu** - Full Stack Developer, AI Developer, AI Automation Specialist & AWS DevOps Engineer
+
+I'm an end-to-end solution designer specializing in scalable and secure development. I architect and build robust full-stack applications, implement AI-driven automation solutions, and optimize cloud infrastructure on AWS. Passionate about delivering high-performance, secure solutions from concept to deployment.
+
+### 🎯 Core Expertise
+- **Frontend:** React/Next.js, TypeScript, Modern JavaScript
+- **Backend:** Node.js, Python, Express.js, REST APIs
+- **AI/ML:** TensorFlow, PyTorch, AI Automation, Machine Learning
+- **Cloud:** AWS, Docker, Kubernetes, CI/CD Pipelines
+- **Database:** MongoDB, PostgreSQL, Redis, DynamoDB
 
 ---
 
@@ -160,8 +175,7 @@ pnpm run preview # Preview production build locally
 src/
 ├── components/
 │   ├── layout/              # Navigation & layout components
-│   │   ├── Navbar/         # Active navigation with scroll detection
-│   │   └── FloatingNavigation/
+│   │   └── Navbar/         # Active navigation with scroll detection
 │   ├── sections/           # Main content sections
 │   │   ├── Hero/           # Landing section with grid layout
 │   │   ├── Chatbot/        # AI Assistant section integration
@@ -340,11 +354,11 @@ Comprehensive development documentation is available in the `docs/claude-develop
 
 ## 👨‍💻 Author
 
-**Yuelin Liu** - Full Stack Developer & AI Engineer
+**Vidusha Sanidu** - Full Stack Developer, AI Developer & AWS DevOps Engineer
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/liuyuelintop)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/liuyuelintop)
-[![Blog](https://img.shields.io/badge/Blog-Read-orange?style=flat-square&logo=hashnode)](https://blog.liuyuelin.dev/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/vidushasanidu)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/VidushaSanidu)
+[![Blog](https://img.shields.io/badge/Medium-Read-green?style=flat-square&logo=medium)](https://medium.com/@vidushsanidu07)
 
 ---
 
@@ -357,4 +371,4 @@ If this project helped you create an amazing portfolio, please:
 3. 📢 **Share it with others**
 4. 🐛 **Report any issues**
 
-> **Built with ❤️ using React, Tailwind CSS, and Claude Code assistance**
+> **Built with ❤️ using React, Tailwind CSS, and modern web technologies**
