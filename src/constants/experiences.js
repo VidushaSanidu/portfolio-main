@@ -1,5 +1,28 @@
 export const EXPERIENCES = [
   {
+    period: "2023 – Present",
+    role: "Co-Founder & Solution Architect",
+    company: {
+      name: "Xanvia",
+      url: "https://www.xanvia.tech"
+    },
+    type: "Full-time",
+    highlights: [
+      "Leading the development of AI-driven SaaS solutions to streamline business operations",
+      "Architecting scalable cloud infrastructure on AWS to support growing user base",
+      "Implementing machine learning models to enhance product capabilities and user experience",
+      "Collaborating with cross-functional teams to drive innovation and deliver high-quality software",
+      "Overseeing end-to-end product development from ideation to deployment and maintenance",
+    ],
+    techStack: {
+      frontend: ["Next.js","React.js", "Vue.js", "Tailwind", "Shadcn UI"],
+      backend: ["Node.js", "Nest.js", "Express.js", "Python"],
+      Ai: ["Python", "Langchain", "Hugging Face", "Scikit-learn"],
+      CICD: ["AWS", "Google Cloud Platform", "Docker", "Kubernetes"],
+      database: ["PostgreSQL", "MongoDB","Redis"],
+    },
+  },
+  {
     period: "2025 – Present",
     role: "Full Stack Developer",
     company: {
@@ -23,8 +46,8 @@ export const EXPERIENCES = [
     },
   },
   {
-    period: "2023 – Present",
-    role: "End-to-End Developer & AI Automation Specialist",
+    period: "2023 – 2025",
+    role: "Software Developer & AI Automation Specialist",
     company: {
       name: "Freelance",
       url: "##",

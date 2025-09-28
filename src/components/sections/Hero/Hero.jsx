@@ -15,6 +15,7 @@ import {
     cursorGlowVariants,
     profileCardVariants
 } from "./animations";
+import { QUICK_STATS } from "../../../constants/skills";
 
 export default function Hero() {
     const { cvUrl, isLoading } = useCV();
@@ -287,11 +288,11 @@ export default function Hero() {
                                 >
                                     <div className="grid grid-cols-2 gap-4 text-center">
                                         <div>
-                                            <div className="text-2xl font-bold text-cyan-400">3+</div>
+                                            <div className="text-2xl font-bold text-cyan-400">{QUICK_STATS[0].value}</div>
                                             <div className="text-sm text-neutral-400">Years Experience</div>
                                         </div>
                                         <div>
-                                            <div className="text-2xl font-bold text-purple-400">10+</div>
+                                            <div className="text-2xl font-bold text-purple-400">{QUICK_STATS[1].value}</div>
                                             <div className="text-sm text-neutral-400">Projects Completed</div>
                                         </div>
                                     </div>
