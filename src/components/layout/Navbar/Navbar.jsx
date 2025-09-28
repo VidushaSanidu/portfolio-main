@@ -2,14 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { getThemeFocusRing } from '../../../utils/accessibility';
-import ThemeSwitcherButton from '../../ui/common/ThemeSwitcherButton';
 
 const SECTION_LINKS = [
-    { label: 'Me', href: '#hero' },
+    { label: 'Home', href: '#hero' },
     { label: 'Experience', href: '#experience' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Blog', href: '#blog' },
     { label: 'References', href: '#references' },
     { label: 'Brand', href: '#brand' },
     { label: 'GitHub', href: '#github' },
@@ -64,31 +62,23 @@ export default function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className={`fixed top-0 w-full backdrop-blur-xl shadow-xl z-50 border-b transition-all duration-500 ${
-                currentTheme === 'minimal' 
-                    ? 'bg-white/95 border-gray-200/50 shadow-gray-200/20' 
-                    : 'bg-neutral-900/90 border-neutral-800/50 shadow-black/20'
-            }`}
+            className="fixed top-0 w-full backdrop-blur-xl shadow-xl z-50 border-b transition-all duration-500 bg-neutral-900/90 border-neutral-800/50 shadow-black/20"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <motion.span 
-                            className={`text-xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${
-                                currentTheme === 'minimal'
-                                    ? 'from-gray-800 to-gray-600'
-                                    : 'from-purple-400 to-blue-400'
-                            }`}
+                            className="text-xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-purple-400 to-blue-400"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
-                            Yuelin&apos;s Portfolio
+                            ViduzX <span className="text-sm font-normal">| XANVIA</span>
                         </motion.span>
                     </div>
 
                     {/* Desktop Navigation - Centered */}
-                    <div className="hidden md:flex items-center justify-center flex-1">
+                    <div className="hidden md:flex items-center justify-end flex-1">
                         <div className="flex items-center space-x-2">
                             {SECTION_LINKS.map((item) => {
                                 const isActive = activeSection === item.href.slice(1);
@@ -98,12 +88,8 @@ export default function Navbar() {
                                         href={item.href}
                                         className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${getThemeFocusRing(currentTheme)} ${
                                             isActive
-                                                ? currentTheme === 'minimal'
-                                                    ? 'text-white bg-gray-900 shadow-lg'
-                                                    : 'text-white bg-purple-600 shadow-lg shadow-purple-500/25'
-                                                : currentTheme === 'minimal'
-                                                    ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                                                    : 'text-neutral-300 hover:text-purple-400 hover:bg-purple-400/10'
+                                                ? 'text-white bg-purple-600 shadow-lg shadow-purple-500/25'
+                                                : 'text-neutral-300 hover:text-purple-400 hover:bg-purple-400/10'
                                         }`}
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
@@ -113,11 +99,7 @@ export default function Navbar() {
                                         {isActive && (
                                             <motion.div
                                                 layoutId="activeNavItem"
-                                                className={`absolute inset-0 rounded-xl ${
-                                                    currentTheme === 'minimal'
-                                                        ? 'bg-gray-900 shadow-lg'
-                                                        : 'bg-purple-600 shadow-lg shadow-purple-500/25'
-                                                }`}
+                                                className="absolute inset-0 rounded-xl bg-purple-600 shadow-lg shadow-purple-500/25"
                                                 style={{ zIndex: -1 }}
                                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                             />
@@ -128,54 +110,37 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    {/* Desktop Theme Switcher */}
-                    <ThemeSwitcherButton 
-                        className="hidden md:block flex-shrink-0"
-                        layoutId="desktopActiveTheme"
-                    />
-
-                    {/* Mobile Theme Switcher & Menu Button */}
-                    <div className="md:hidden flex items-center space-x-2">
-                        {/* Mobile Theme Switcher */}
-                        <ThemeSwitcherButton 
-                            isMobile={true}
-                            layoutId="mobileActiveTheme"
-                        />
-
-                        {/* Mobile Menu Button */}
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden">
                         <motion.button
                             ref={buttonRef}
                             aria-label="Toggle navigation menu"
                             aria-expanded={isOpen}
-                            className={`p-3 rounded-xl transition-all duration-300 ${
-                            currentTheme === 'minimal'
-                                ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                                : 'text-neutral-300 hover:text-purple-400 hover:bg-purple-400/10'
-                        }`}
-                        onClick={toggleMenu}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <motion.svg 
-                            className="w-6 h-6" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                            animate={{ rotate: isOpen ? 45 : 0 }}
-                            transition={{ duration: 0.2 }}
+                            className="p-3 rounded-xl transition-all duration-300 text-neutral-300 hover:text-purple-400 hover:bg-purple-400/10"
+                            onClick={toggleMenu}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            <motion.path 
-                                strokeLinecap="round" 
-                                strokeLinejoin="round" 
-                                strokeWidth={2} 
-                                animate={{
-                                    d: isOpen 
-                                        ? "M6 6l12 12M6 18L18 6" 
-                                        : "M4 6h16M4 12h16M4 18h16"
-                                }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </motion.svg>
+                            <motion.svg 
+                                className="w-6 h-6" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                                animate={{ rotate: isOpen ? 45 : 0 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <motion.path 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                    strokeWidth={2} 
+                                    animate={{
+                                        d: isOpen 
+                                            ? "M6 6l12 12M6 18L18 6" 
+                                            : "M4 6h16M4 12h16M4 18h16"
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                />
+                            </motion.svg>
                         </motion.button>
                     </div>
                 </div>
@@ -206,11 +171,7 @@ export default function Navbar() {
                                     duration: 0.15
                                 }
                             }}
-                            className={`md:hidden py-4 space-y-2 border-t transition-colors ${
-                                currentTheme === 'minimal'
-                                    ? 'bg-white/95 border-gray-200'
-                                    : 'bg-neutral-900/95 border-neutral-800'
-                            }`}
+                            className={`md:hidden py-4 space-y-2 border-t transition-colors bg-neutral-900/95 border-neutral-800`}
                         >
                             {SECTION_LINKS.map((item, index) => {
                                 const isActive = activeSection === item.href.slice(1);
@@ -223,12 +184,8 @@ export default function Navbar() {
                                         transition={{ delay: index * 0.05 }}
                                         className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300 text-base font-medium ${
                                             isActive
-                                                ? currentTheme === 'minimal'
-                                                    ? 'text-white bg-gray-900 shadow-lg'
-                                                    : 'text-white bg-purple-600 shadow-lg shadow-purple-500/25'
-                                                : currentTheme === 'minimal'
-                                                    ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                                                    : 'text-neutral-300 hover:text-purple-400 hover:bg-purple-400/10'
+                                                ? 'text-white bg-purple-600 shadow-lg shadow-purple-500/25'
+                                                : 'text-neutral-300 hover:text-purple-400 hover:bg-purple-400/10'
                                         }`}
                                         onClick={() => setIsOpen(false)}
                                         whileHover={{ x: 5 }}

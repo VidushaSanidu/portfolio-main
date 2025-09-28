@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import  { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useUI } from '../../../hooks/useUI';
@@ -328,7 +328,7 @@ const CareerChatbot = () => {
           {/* Load Iframe Button */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm">
             <motion.button
-              onClick={() => setShouldLoadIframe(true)}
+              // onClick={() => setShouldLoadIframe(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className={`
@@ -344,7 +344,8 @@ const CareerChatbot = () => {
               `}
             >
               <span className="text-xl">💬</span>
-              <span>Start Chatting</span>
+              {/* <span>Start Chatting</span> */}
+              <span>Available Soon!</span>
             </motion.button>
           </div>
         </div>

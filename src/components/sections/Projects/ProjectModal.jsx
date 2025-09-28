@@ -157,7 +157,7 @@ export default function ProjectModal({ project, onClose }) {
   ]
 
   // Add live preview tab if project has URL
-  const tabs = project?.url ? [...baseTabs, { id: "preview", label: "Live Preview", icon: "🚀" }] : baseTabs
+  const tabs = project?.url ? [...baseTabs] : baseTabs
 
   // Handle tab change - manage live preview state
   const handleTabChange = (tabId) => {
@@ -376,24 +376,6 @@ export default function ProjectModal({ project, onClose }) {
                 </div>
               )}
 
-              {activeTab === "preview" && project.url && (
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center justify-between mb-3 sm:mb-4">
-                    <h3 className={`text-base sm:text-lg font-semibold ${styles.header}`}>Interactive Live Preview</h3>
-                    <span className={`text-xs px-2 py-1 rounded-full ${styles.badge}`}>Live Site</span>
-                  </div>
-                  <div className={`rounded-lg border overflow-hidden ${styles.divider}`}>
-                    <LiveDemoPreview
-                      project={project}
-                      isVisible={showLivePreview}
-                      onClose={() => setShowLivePreview(false)}
-                    />
-                  </div>
-                  <div className={`text-xs sm:text-sm ${styles.textSecondary} text-center`}>
-                    <p>💡 Tip: Click the device icons above to switch between desktop, tablet, and mobile views</p>
-                  </div>
-                </div>
-              )}
             </motion.div>
           </div>
 

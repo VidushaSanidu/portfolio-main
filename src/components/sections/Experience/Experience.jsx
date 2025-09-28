@@ -260,8 +260,8 @@ export default function Experience() {
             currentTheme === 'minimal' ? 'text-gray-600' : 'text-neutral-400'
           }`}
         >
-          My journey through full-stack development, from graduate roles to senior engineering positions.
-          Click on any experience to explore detailed achievements and technologies.
+          Started as an Freelancer in 2023, I have since worked with a variety of clients, ranging from startups to established enterprises.
+           My journey has been marked by continuous learning and adaptation to new technologies and methodologies.
         </motion.p>
       </div>
 

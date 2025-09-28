@@ -1,29 +1,34 @@
 export const HERO_CONTENT = {
-  name: "Yuelin Liu",
+  name: "Vidusha Sanidu",
   roles: [
+    "Co-Founder @ Xanvia",
     "Full Stack Developer",
-    "AI Engineer",
-    "React Specialist",
-    "Product Builder"
+    "AI Developer",
+    "AI Automation & Integration Specialist",
+    "AWS & DevOps Engineer"
   ],
-  summary: `Builder of robust SaaS products, clean code, and scalable APIs. At ByteCronix, I shipped real-world AI/PR features across microservices, infra, and UI. I thrive in ambiguity and deliver high-velocity results—frontend to backend, infra to UI polish.`,
+  summary: `End-to-end solution designer specializing in scalable and secure development. I architect and build robust full-stack applications, implement AI-driven automation solutions, and optimize cloud infrastructure on AWS. Passionate about delivering high-performance, secure solutions from concept to deployment.`,
   highlights: [
   "Modern React/Next.js",
-  "Cloud & CI/CD Automation",
-  "AI Engineering (learning)",
-  "LangChain & RAG",
-  "LLM Product Integrations",
-  "Vector DB Search (Pinecone, Weaviate)",
+  "AI & Machine Learning",
+  "AWS Cloud Solutions",
+  "DevOps & CI/CD",
+  "Scalable Architecture",
+  "Security Best Practices",
 ],
 };
 
 export const CONTACT = {
-  address: "464 Collins St, MEL, VIC 3000",
-  phoneNo: "+61 451 690 105",
-  email: "liuyuelintop@gmail.com",
+  address: "Colombo, Sri Lanka",
+  phoneNo: "+94 76 041 6256",
+  email: "vidushsanidu07@gmail.com",
   socials: {
-    linkedin: "https://linkedin.com/in/liuyuelintop",
-    github: "https://github.com/liuyuelintop",
-    blog: "https://blog.liuyuelin.dev/",
+    linkedin: "https://www.linkedin.com/in/vidushasanidu",
+    github: "https://github.com/VidushaSanidu",
+    medium: "https://medium.com/@vidushsanidu07",
+    facebook: "https://facebook.com/vidusha.sanidu", 
+    instagram: "https://www.instagram.com/_vidu_sh", 
+    kaggle: "https://kaggle.com/vidushasanidu",
+    whatsapp: "https://wa.me/94760416256", 
   },
 };
