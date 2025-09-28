@@ -133,7 +133,9 @@ const CategoryCard = ({ category, data, index, activeCategory, setActiveCategory
       {/* Category Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">{data.icon}</span>
+          <span className="text-2xl">
+            <data.icon className="w-6 h-6" />
+          </span>
           <h3 className={`text-lg font-bold ${theme.currentTheme === 'minimal' ? 'text-gray-800' : 'text-white'
             }`}>
             {category}
@@ -255,11 +257,8 @@ export default function SkillsVisualization() {
       >
         <h3 className={`text-2xl font-bold text-center mb-8 ${theme.currentTheme === 'minimal' ? 'text-gray-800' : 'text-white'
           }`}>
-          Performance Metrics
+          Statistics
         </h3>
-        <div className="flex justify-center">
-          <LighthouseScoreCard />
-        </div>
       </motion.div>
 
       {/* Quick Stats */}
@@ -281,7 +280,7 @@ export default function SkillsVisualization() {
               }
             `}
           >
-            <div className="text-2xl mb-2">{stat.icon}</div>
+            <div className="text-2xl mb-4 flex items-center justify-center"><stat.icon className="w-6 h-6 text-purple-400" /></div>
             <div className={`text-2xl font-bold ${theme.currentTheme === 'minimal' ? 'text-gray-800' : 'text-white'
               }`}>
               {stat.value}
