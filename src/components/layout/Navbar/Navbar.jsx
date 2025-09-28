@@ -73,7 +73,17 @@ export default function Navbar() {
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
-                            ViduzX <span className="text-sm font-normal">| XANVIA</span>
+                            ViduzX <span className="text-sm font-normal">| </span>
+                            <motion.a
+                                href="https://xanvia.tech"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-sm font-normal hover:text-cyan-400 transition-colors duration-300"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                XANVIA
+                            </motion.a>
                         </motion.span>
                     </div>
 
