@@ -60,7 +60,7 @@ export const SKILLS_DATA = {
 };
 
 export const QUICK_STATS = [
-          { label: "Years Experience", value: "3+", icon: History },
+          { label: "Years Experience", value: "4+", icon: History },
           { label: "Projects Built", value: "20+", icon: FolderGit2 },
           { label: "Technologies", value: "20+", icon: Cpu },
           { label: "AI Solutions", value: "5+", icon: Brain},

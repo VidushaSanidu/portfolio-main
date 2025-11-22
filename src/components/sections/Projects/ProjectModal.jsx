@@ -8,6 +8,7 @@ import { getThemeFocusRing } from "../../../utils/accessibility"
 import OptimizedImage from "../../ui/common/OptimizedImage"
 import Button from "../../ui/common/Button"
 import LiveDemoPreview from "./LiveDemoPreview"
+import ImageSlider from "./ImageSlider"
 
 // Animation variants
 const modalVariants = {
@@ -245,14 +246,11 @@ export default function ProjectModal({ project, onClose }) {
             >
               {activeTab === "overview" && (
                 <div className="space-y-4 sm:space-y-6">
-                  {/* Project Image */}
-                  <div className="relative rounded-lg sm:rounded-xl overflow-hidden">
-                    <OptimizedImage
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full aspect-video object-cover"
-                    />
-                  </div>
+                  {/* Project Image Slider */}
+                  <ImageSlider 
+                    images={project.images || [project.image]} 
+                    projectTitle={project.title}
+                  />
 
                   {/* Project Description */}
                   <div>
@@ -423,7 +421,8 @@ export default function ProjectModal({ project, onClose }) {
 ProjectModal.propTypes = {
   project: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.shape({
       summary: PropTypes.string.isRequired,
       detailed: PropTypes.string,
