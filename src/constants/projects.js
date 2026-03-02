@@ -1,6 +1,26 @@
 import { projectImages } from "./assets";
 
 export const PROJECTS = [
+   {
+    title: "EchoIC - AI Voice cloning & Analyze Service",
+    image: projectImages.echoIc,
+    images: [projectImages.echoIc, projectImages.echoIc2],
+    description: {
+      summary: "AI powered voice cloning and analysis service that allows users to create custom voice models and analyze audio data for insights.",
+      features: [
+        "AI voice cloning using state-of-the-art models for high-quality voice synthesis",
+        "Audio analysis tools for extracting insights and patterns from audio data",
+        "Job queue system for processing voice cloning and analysis tasks asynchronously",
+        "Secure data handling and privacy controls for user-generated content (Stored in Cloudflare R2)",
+        "Scalable architecture to support growing user base and data volumes"
+      ]
+    },
+    url: "https://echo-ic.com", 
+    technologies: {
+      main: ["Python", "XTTS", "chatGPT model APIs", "Node.js", "Cloudflare R2", "Stripe"],
+      others: ["CICD","Docker", "TTS models", "Audio processing libraries"]
+    }
+  },
   {
     title: "AI Assistant & Study Planner | TPT School - Florida, USA",
     image: projectImages.tptschool1,
@@ -19,6 +39,26 @@ export const PROJECTS = [
     technologies: {
       main: ["FastAPI", "LangChain", "Python", "React", "Google Gemini", "Redis"],
       others: ["OCR","Docker", "Chromadb"]
+    }
+  },
+    {
+    title: "Logging Pipeline for Scalable Applications",
+    image: projectImages.logging,
+    images: [projectImages.logging],
+    description: {
+      summary: "Comprehensive logging pipeline designed to handle high-throughput log data for scalable applications.",
+      features: [
+        "Centralized log pipeline using AWS Lambda, SQS, and S3",
+        "Real-time log processing and storage",
+        "Scalable architecture to handle increasing log volumes",
+        "Cost-effective storage solutions using S3",
+        "Robust error handling and retry mechanisms"
+      ]
+    },
+    url: "#", 
+    technologies: {
+      main: ["AWS Lambda", "SQS", "S3", "node.js"],
+      others: ["cloudwatch", "IAM"]
     }
   },
   {
@@ -43,26 +83,7 @@ export const PROJECTS = [
       others: ["Docker", "Github Actions", "PostgreSQL"]
     }
   },
-  {
-    title: "Logging Pipeline for Scalable Applications",
-    image: projectImages.logging,
-    images: [projectImages.logging],
-    description: {
-      summary: "Comprehensive logging pipeline designed to handle high-throughput log data for scalable applications.",
-      features: [
-        "Centralized log pipeline using AWS Lambda, SQS, and S3",
-        "Real-time log processing and storage",
-        "Scalable architecture to handle increasing log volumes",
-        "Cost-effective storage solutions using S3",
-        "Robust error handling and retry mechanisms"
-      ]
-    },
-    url: "#", 
-    technologies: {
-      main: ["AWS Lambda", "SQS", "S3", "node.js"],
-      others: ["cloudwatch", "IAM"]
-    }
-  },
+
   {
     title: "StudentMoves | UK based Student Accommodation Platform",
     image: projectImages.studentmoves1,
@@ -119,7 +140,7 @@ export const PROJECTS = [
         "Automated testing and continuous deployment"
       ]
     },
-    url: "https://ceit.pdn.ac.lk", 
+    url: "https://www.ceit.pdn.ac.lk", 
     technologies: {
       main: ["Next.js", "Nest.js","TypeScript", "MySQL"],
       others: ["Shadcn", "Docker", "GitHub Actions"]

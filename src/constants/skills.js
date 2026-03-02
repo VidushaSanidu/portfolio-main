@@ -18,9 +18,9 @@ export const SKILLS_DATA = {
     color: "from-green-500 to-emerald-500",
     skills: [
       { name: "Node.js/Express.js", level: 90, years: 3, projects: 10 },
+      { name: "GoLang", level: 80, years: 1, projects: 1 },
       { name: "Nest.js", level: 90, years: 3, projects: 5 },
       { name: "FastAPI", level: 85, years: 1, projects: 3 },
-      { name: "Django/Flask", level: 75, years: 1, projects: 1 },
       { name: "REST APIs", level: 95, years: 3, projects: 18 },
     ]
   },

@@ -16,6 +16,9 @@ import tptschool2 from "../assets/projects/tptschool2.png";
 import vehicletax1 from "../assets/projects/vehicletax1.png";
 import vehicletax2 from "../assets/projects/vehicletax2.png";
 
+import echoIc from "../assets/projects/echoIc.png";
+import echoIc2 from "../assets/projects/echoIc2.png";
+
 import logging from "../assets/projects/logging.png";
 
 export const projectImages = {
@@ -32,4 +35,6 @@ export const projectImages = {
   vehicletax1,
   vehicletax2,
   logging,
+  echoIc,
+  echoIc2
 };
