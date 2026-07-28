@@ -1,4 +1,4 @@
-import  { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useUI } from '../../../hooks/useUI';
@@ -27,11 +27,11 @@ const CareerChatbot = () => {
     const handleViewportChange = () => {
       const currentHeight = window.innerHeight;
       const heightDifference = initialViewportHeight - currentHeight;
-      
+
       // If viewport height decreased by more than 100px, likely keyboard is open
       const keyboardThreshold = 100;
       const shouldHideNavigation = heightDifference > keyboardThreshold;
-      
+
       if (shouldHideNavigation !== isKeyboardOpen) {
         isKeyboardOpen = shouldHideNavigation;
         setIsChatbotFocused(shouldHideNavigation);
@@ -42,12 +42,12 @@ const CareerChatbot = () => {
       // Immediately hide navigation when interacting with iframe on mobile
       if (isMobile) {
         setIsChatbotFocused(true);
-        
+
         // Clear any existing timer
         if (hideNavigationTimer) {
           clearTimeout(hideNavigationTimer);
         }
-        
+
         // Set timer to show navigation again after 3 seconds of no interaction
         hideNavigationTimer = setTimeout(() => {
           // Only show navigation again if viewport height hasn't changed
@@ -65,7 +65,7 @@ const CareerChatbot = () => {
       // Add event listeners for iframe interaction
       iframe.addEventListener('mousedown', handleIframeInteraction);
       iframe.addEventListener('touchstart', handleIframeInteraction);
-      
+
       iframe.addEventListener('load', () => {
         // Try to listen for events inside iframe (may not work due to cross-origin)
         try {
@@ -139,22 +139,21 @@ const CareerChatbot = () => {
   const renderFallbackUI = () => (
     <div className="flex flex-col h-full">
       {/* Enhanced Header */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className={`p-6 border-b backdrop-blur-sm ${
-          currentTheme === 'minimal' 
-            ? 'border-gray-200 bg-white/50' 
+        className={`p-6 border-b backdrop-blur-sm ${currentTheme === 'minimal'
+            ? 'border-gray-200 bg-white/50'
             : currentTheme === 'neon'
               ? 'border-cyan-800/50 bg-cyan-900/10'
               : currentTheme === 'corporate'
                 ? 'border-blue-200/50 bg-blue-50/50'
                 : 'border-purple-700/50 bg-purple-900/10'
-        }`}
+          }`}
       >
         <div className="flex items-center gap-4">
-          <motion.div 
+          <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             className="text-3xl"
@@ -162,7 +161,7 @@ const CareerChatbot = () => {
             🤖
           </motion.div>
           <div>
-            <motion.h3 
+            <motion.h3
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
@@ -170,7 +169,7 @@ const CareerChatbot = () => {
             >
               Career Chatbot Assistant
             </motion.h3>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 0.8, x: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
@@ -223,15 +222,14 @@ const CareerChatbot = () => {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-              className={`flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 ${
-                currentTheme === 'neon'
+              className={`flex items-center gap-3 p-3 rounded-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 ${currentTheme === 'neon'
                   ? 'bg-cyan-900/20 border border-cyan-800/30 hover:bg-cyan-900/30'
                   : currentTheme === 'minimal'
                     ? 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
                     : currentTheme === 'corporate'
                       ? 'bg-blue-50 border border-blue-200 hover:bg-blue-100'
                       : 'bg-purple-900/20 border border-purple-700/30 hover:bg-purple-900/30'
-              }`}
+                }`}
             >
               <span className="text-lg">{feature.icon}</span>
               <span className={`text-sm font-medium ${themeStyles.text} opacity-80`}>
@@ -243,13 +241,13 @@ const CareerChatbot = () => {
 
         {/* Enhanced Action Button */}
         <motion.a
-          href="https://huggingface.co/spaces/liuyuelintop/career_chatbots"
+          // href="https://huggingface.co/spaces/liuyuelintop/career_chatbots"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.8 }}
-          whileHover={{ 
+          whileHover={{
             scale: 1.05,
             boxShadow: currentTheme === 'neon'
               ? '0 10px 30px rgba(6, 182, 212, 0.4)'
@@ -274,8 +272,8 @@ const CareerChatbot = () => {
         >
           {/* Shine effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out" />
-          
-          <motion.span 
+
+          <motion.span
             className="text-xl"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -379,15 +377,14 @@ const CareerChatbot = () => {
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           transition={{ duration: 0.5, delay: 2 }}
-          className={`absolute top-4 right-4 px-3 py-1.5 rounded-lg text-xs font-medium backdrop-blur-sm ${
-            currentTheme === 'minimal'
+          className={`absolute top-4 right-4 px-3 py-1.5 rounded-lg text-xs font-medium backdrop-blur-sm ${currentTheme === 'minimal'
               ? 'bg-white/90 text-gray-700 border border-gray-200'
               : currentTheme === 'neon'
-              ? 'bg-cyan-900/90 text-cyan-200 border border-cyan-700'
-              : currentTheme === 'corporate'
-              ? 'bg-blue-900/90 text-blue-200 border border-blue-700'
-              : 'bg-purple-900/90 text-purple-200 border border-purple-700'
-          }`}
+                ? 'bg-cyan-900/90 text-cyan-200 border border-cyan-700'
+                : currentTheme === 'corporate'
+                  ? 'bg-blue-900/90 text-blue-200 border border-blue-700'
+                  : 'bg-purple-900/90 text-purple-200 border border-purple-700'
+            }`}
           style={{ pointerEvents: 'none' }}
         >
           <div className="flex items-center gap-2">

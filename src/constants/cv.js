@@ -2,7 +2,7 @@
 export const CV_CONFIG = {
   // Main CV file
   filename: 'resume.pdf', // Change this to match your actual filename
-  
+
   // Alternative: if you want to maintain multiple versions
   versions: {
     latest: 'resume-2024.pdf',

@@ -1,20 +1,21 @@
 export const HERO_CONTENT = {
   name: "Vidusha Sanidu",
   roles: [
+    "AI Researcher",
+    "AI/ML Developer",
+    "AI Agent & Automation Engineer",
+    "Cloud & DevOps Engineer",
     "Full Stack Developer",
-    "AI Developer",
-    "AI Automation & Integration Specialist",
-    "AWS & DevOps Engineer"
   ],
-  summary: `End-to-end solution designer specializing in scalable and secure development. I architect and build robust full-stack applications, implement AI-driven automation solutions, and optimize cloud infrastructure on AWS. Passionate about delivering high-performance, secure solutions from concept to deployment.`,
+  summary: `End-to-end solution designer specializing in AI and agentic systems. I architect and build robust full-stack applications, implement AI-driven automation solutions, and optimize cloud infrastructure on AWS. Passionate about delivering high-performance, secure solutions from concept to deployment.`,
   highlights: [
-  "Modern React/Next.js",
-  "AI & Machine Learning",
-  "AWS Cloud Solutions",
-  "DevOps & CI/CD",
-  "Scalable Architecture",
-  "Security Best Practices",
-],
+    "Generative AI & Large Language Models",
+    "Machine Learning & Deep Learning",
+    "AWS Cloud Solutions",
+    "DevOps & CI/CD",
+    "Scalable Architecture",
+    "Security Best Practices",
+  ],
 };
 
 export const CONTACT = {
@@ -25,9 +26,9 @@ export const CONTACT = {
     linkedin: "https://www.linkedin.com/in/vidushasanidu",
     github: "https://github.com/VidushaSanidu",
     medium: "https://medium.com/@vidushsanidu07",
-    facebook: "https://facebook.com/vidusha.sanidu", 
-    instagram: "https://www.instagram.com/_vidu_sh", 
+    facebook: "https://facebook.com/vidusha.sanidu",
+    instagram: "https://www.instagram.com/_vidu_sh",
     kaggle: "https://kaggle.com/vidushasanidu",
-    whatsapp: "https://wa.me/94760416256", 
+    whatsapp: "https://wa.me/94760416256",
   },
 };
